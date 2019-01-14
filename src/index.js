@@ -1,20 +1,17 @@
 import 'phaser'
 
 import constants from './config/constants'
-
 import BootScene from './scenes/ui/boot'
 
-import SplashScene from './scenes/ui/splash'
-import MadeWithScene from './scenes/ui/madeWith'
-
-import MainMenuScene from './scenes/ui/mainMenu'
-import OptionsScene from './scenes/ui/options'
-import CreditsScene from './scenes/ui/credits'
-
-import HUDGameScene from './scenes/game/HUDGame'
-import BaseGameScene from './scenes/game/baseGame'
-
-import PauseScene from './scenes/ui/pause'
+// STATES
+import BootState from './scenes/states/boot'
+import EditIdleState from './scenes/states/editIdle'
+import OptimizeState from './scenes/states/optimize'
+import PrintState from './scenes/states/print'
+import ResultsState from './scenes/states/results'
+import SelectState from './scenes/states/select'
+import SendState from './scenes/states/send'
+import TutorialState from './scenes/states/tutorial'
 
 import getSceneManager from './managers/sceneManager'
 import getDataManager from './managers/dataManager'
@@ -34,14 +31,9 @@ window.game = new Phaser.Game({
   resolution: constants.SCALE,
   scene: [
     BootScene,
-    SplashScene,
-    MadeWithScene,
-    MainMenuScene,
-    OptionsScene,
-    CreditsScene,
-    HUDGameScene,
-    BaseGameScene,
-    PauseScene
+    BootState,
+    EditIdleState,
+    TutorialState
   ]
 })
 

@@ -3,6 +3,7 @@ import fonts from '../config/fonts'
 import getSceneManager from '../managers/sceneManager'
 import getTranslator from '../managers/translatorManager'
 import StateHandler from '../managers/state'
+import getIOManager from '../managers/ioManager'
 
 import stats from '../utils/performance'
 
@@ -24,6 +25,8 @@ export default class Scene extends Phaser.Scene {
 
   preload() {
     this.sceneManager = getSceneManager(this.scene)
+    this.io = getIOManager()
+    this.io.clearListeners()
   }
 
   init() {}

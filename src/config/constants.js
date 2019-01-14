@@ -31,11 +31,11 @@ const RUNNING_STATS = true
 // display dat.gui plugin
 const DAT_GUI_ENABLE = true
 
-const AFTER_BOOT_SCENE = 'madeWithScene'
+const AFTER_BOOT_SCENE = 'bootState'
 
 export default {
-  WIDTH: 320,
-  HEIGHT: 240,
+  WIDTH: 640,
+  HEIGHT: 480,
   SCALE,
   BACKGROUND_COLOR,
   FAKE_LOADER_ACTIVE,
