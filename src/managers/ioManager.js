@@ -1,18 +1,20 @@
 import io from 'socket.io-client';
-const socket = io('http://localhost:8000');
-
+const socket = io('http://localhost:8000',
+  {reconnectionAttempts: 3}
+)
+console.log(socket)
 let Inputs = {
-  'A': {pressed: false},
-  'B': {pressed: false},
-  'C': {pressed: false},
-  'D': {pressed: false},
-  'E': {pressed: false},
-  'F': {pressed: false},
-  '0': {pressed: false},
-  '1': {pressed: false},
-  '2': {pressed: false},
-  '3': {pressed: false},
-  '4': {pressed: false},
+  'BTN-A': {pressed: false},
+  'BTN-B': {pressed: false},
+  'BTN-C': {pressed: false},
+  'BTN-D': {pressed: false},
+  'BTN-E': {pressed: false},
+  'BTN-F': {pressed: false},
+  'BTN-0': {pressed: false},
+  'BTN-1': {pressed: false},
+  'BTN-2': {pressed: false},
+  'BTN-3': {pressed: false},
+  'BTN-4': {pressed: false},
   'ACCEPT': {pressed: false},
   'REJECT': {pressed: false},
   'LEFT': {value: 0},
@@ -34,11 +36,13 @@ class IOManager {
 
     socket.on('gpio', data => {
       //console.log('Read from GPIO: ' + data.action);
+      this.Inputs[data.action].pressed = data.status=='1'
       let event = this.listeners[data.action]
       if(event) event(data)
     });
 
     this.clearListeners()
+    this.Inputs = Inputs
   }
 
   clearListeners(){
