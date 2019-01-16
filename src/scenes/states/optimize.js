@@ -4,27 +4,12 @@ export default class OptimizeState extends Scene {
   constructor () {
     super({key: 'optimizeState'})
 
-    this.optButtons = {
-      optA: {
-        rotating: false,
-        timer: 300
-      },
-      optB: {
-        rotating: false,
-        timer: 300
-      },
-      optC: {
-        rotating: false,
-        timer: 300
-      },
-      optD: {
-        rotating: false,
-        timer: 300
-      },
-      optE: {
-        rotating: false,
-        timer: 300
-      }
+    this.rotating = {
+      pieceA: false,
+      pieceB: false,
+      pieceC: false,
+      pieceD: false,
+      pieceE: false
     }
   }
 
@@ -86,8 +71,6 @@ export default class OptimizeState extends Scene {
       optE: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
     }
 
-    // this.optButtons.optA.timer -= delta
-
     if (optInput.optA) {
       console.log('pressed optimization button A')
       this.rotatePiece(this.pieceA, 'optA')
@@ -110,11 +93,9 @@ export default class OptimizeState extends Scene {
     }
   }
 
-  rotatePiece(piece, buttonKey) {
-    if (!this.optButtons[buttonKey].rotating ||
-      this.optButtons[buttonKey].timer > 0) {
-      this.optButtons[buttonKey].rotating = true
-      this.optButtons[buttonKey].timer = -1
+  rotatePiece(piece, pieceName) {
+    if (!this.rotating[pieceName]) {
+      this.rotating[pieceName] = true
 
       this.tweens.add({
         targets: [piece],
@@ -127,9 +108,9 @@ export default class OptimizeState extends Scene {
         // callback scope
         callbackScope: this,
         // function to be executed once the tween has been completed
-        onComplete: function(tween){
-          this.optButtons[buttonKey].timer = 300
-          this.optButtons[buttonKey].rotating = false
+        onComplete: function(tween, targets) {
+          this.rotating[pieceName] = false
+          console.log(targets[0].angle)
         }
       });
     }
