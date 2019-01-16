@@ -40,6 +40,11 @@ window.game = new Phaser.Game({
     BootScene,
     BootState,
     EditIdleState,
+    OptimizeState,
+    PrintState,
+    ResultsState,
+    SelectState,
+    SendState,
     TutorialState
   ]
 })

@@ -36,7 +36,7 @@ export default class EditIdleState extends Scene {
   create (params) {
     super.create(params)
 
-    createUI()
+    //this.createUI()
 
     // add listeners for material selection
     this.io.registerListener('BTN-A', this.handleButton)
@@ -85,7 +85,7 @@ export default class EditIdleState extends Scene {
       }
     }
     else {
-      this.selectedMaterial[data.action].pressed = false
+      this.selectedMaterial[data.action].pressed = data.status
     }
   }
 

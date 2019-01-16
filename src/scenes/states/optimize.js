@@ -3,6 +3,13 @@ import Scene from '../scene'
 export default class OptimizeState extends Scene {
   constructor () {
     super({key: 'optimizeState'})
+    this.inputs = {
+      btn0: {},
+      btn1: {},
+      btn2: {},
+      btn3: {},
+      btn4: {}
+    }
   }
 
   create (params) {
@@ -28,27 +35,27 @@ export default class OptimizeState extends Scene {
 
   update(time, delta) {
     // check optimization buttons that have been pressed
-    let optimizationInput = {
-      optA: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
-      optB: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
-      optC: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
-      optD: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
-      optE: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
+    this.inputs = {
+      btn0: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
+      btn1: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
+      btn2: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
+      btn3: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
+      btn4: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
     }
 
-    if (optimizationInput.optA) {
+    if (this.inputs.btn0) {
       console.log('pressed optimization button A')
     }
-    if (optimizationInput.optB) {
+    if (this.inputs.btn1) {
       console.log('pressed optimization button B')
     }
-    if (optimizationInput.optC) {
+    if (this.inputs.btn2) {
       console.log('pressed optimization button C')
     }
-    if (optimizationInput.optD) {
+    if (this.inputs.btn3) {
       console.log('pressed optimization button D')
     }
-    if (optimizationInput.optE) {
+    if (this.inputs.btn4) {
       console.log('pressed optimization button E')
     }
   }
