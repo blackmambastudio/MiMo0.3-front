@@ -91,7 +91,7 @@ export default class EditIdleState extends Scene {
       }
     }
     else {
-      this.selectedMaterial[data.action].pressed = false
+      this.selectedMaterial[data.action].pressed = data.status
     }
   }
 

@@ -11,6 +11,8 @@ export default class OptimizeState extends Scene {
       pieceD: false,
       pieceE: false
     }
+
+    this.finished = false
   }
 
   create (params) {
@@ -41,16 +43,10 @@ export default class OptimizeState extends Scene {
     this.piecesContainer = this.add.container(128, 128 + 16)
 
     this.pieceA = this.add.sprite(0, 0, 'pieceA')
-    this.pieceB = this.add.sprite(384, 0, 'pieceB')
-    this.pieceC = this.add.sprite(384 * 2, 0, 'pieceC')
-    this.pieceD = this.add.sprite((128 + 64), 256, 'pieceD')
-    this.pieceE = this.add.sprite((128 + 64) + 384, 256, 'pieceE')
-
-    this.pieceA.angle = 45
-    this.pieceB.angle = 45
-    this.pieceC.angle = 45
-    this.pieceD.angle = 45
-    this.pieceE.angle = 45
+    this.pieceB = this.add.sprite(192, 0, 'pieceB')
+    this.pieceC = this.add.sprite(192 * 2, 0, 'pieceC')
+    this.pieceD = this.add.sprite((64 + 32), 128, 'pieceD')
+    this.pieceE = this.add.sprite((64 + 32) + 192, 128, 'pieceE')
 
     this.piecesContainer.add(this.pieceA)
     this.piecesContainer.add(this.pieceB)
@@ -58,38 +54,56 @@ export default class OptimizeState extends Scene {
     this.piecesContainer.add(this.pieceD)
     this.piecesContainer.add(this.pieceE)
 
-    this.piecesContainer.setScale(0.5)
+    // this.piecesContainer.setScale(0.5)
+
+    // rotate the pieces to a random degree and start the mini-game
+    this.piecesContainer
+      .iterate(piece => piece.angle = 0 + (90 * Phaser.Math.Between(0, 3)))
   }
 
   update(time, delta) {
-    // check optimization buttons that have been pressed
-    let optInput = {
-      optA: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
-      optB: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
-      optC: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
-      optD: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
-      optE: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
+    if (this.finished === true) {
+      return
     }
 
-    if (optInput.optA) {
+    let piecesInPlace = 0
+
+    // check optimization buttons that have been pressed
+    this.inputs = {
+      btn0: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
+      btn1: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
+      btn2: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
+      btn3: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
+      btn4: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
+    }
+
+    if (this.inputs.btn0) {
       console.log('pressed optimization button A')
       this.rotatePiece(this.pieceA, 'optA')
     }
-    if (optInput.optB) {
+    if (this.inputs.btn1) {
       console.log('pressed optimization button B')
       this.rotatePiece(this.pieceB, 'optB')
     }
-    if (optInput.optC) {
+    if (this.inputs.btn2) {
       console.log('pressed optimization button C')
       this.rotatePiece(this.pieceC, 'optC')
     }
-    if (optInput.optD) {
+    if (this.inputs.btn3) {
       console.log('pressed optimization button D')
       this.rotatePiece(this.pieceD, 'optD')
     }
-    if (optInput.optE) {
+    if (this.inputs.btn4) {
       console.log('pressed optimization button E')
       this.rotatePiece(this.pieceE, 'optE')
+    }
+
+    // check if the player won the mini-game
+    this.piecesContainer.iterate(piece => piece.angle === 0 && piecesInPlace++)
+
+    if (piecesInPlace === this.piecesContainer.length) {
+      alert('A winner is you!!!')
+      this.finished = true
     }
   }
 

@@ -97,11 +97,11 @@ export default class BootScene extends Scene {
     this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
     // load images
-    this.load.image('pieceA', 'assets/sprites/pattern01.png')
-    this.load.image('pieceB', 'assets/sprites/pattern02.png')
-    this.load.image('pieceC', 'assets/sprites/pattern03.png')
-    this.load.image('pieceD', 'assets/sprites/pattern04.png')
-    this.load.image('pieceE', 'assets/sprites/pattern05.png')
+    this.load.image('pieceA', 'assets/sprites/pieceA.png')
+    this.load.image('pieceB', 'assets/sprites/pieceB.png')
+    this.load.image('pieceC', 'assets/sprites/pieceC.png')
+    this.load.image('pieceD', 'assets/sprites/pieceD.png')
+    this.load.image('pieceE', 'assets/sprites/pieceE.png')
     this.load.image('nextBtn', 'assets/sprites/button_rectangleRed.png')
     this.load.image('nineBtn', 'assets/sprites/panel_boltsBlue.png')
 
