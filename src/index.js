@@ -39,8 +39,9 @@ window.game = new Phaser.Game({
   scene: [
     BootScene,
     BootState,
+    TutorialState,
     EditIdleState,
-    TutorialState
+    OptimizeState
   ]
 })
 

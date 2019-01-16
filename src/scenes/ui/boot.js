@@ -91,57 +91,19 @@ export default class BootScene extends Scene {
       frameHeight: 331
     })
 
-    // load sprite atlas
-    this.load.atlas(
-      'skeleton',
-      'assets/sprites/skeleton.png',
-      'assets/sprites/skeleton.json'
-    )
-    this.load.json(
-      'skeleton_states',
-      urlBase + 'assets/sprites/skeleton_states.json'
-    )
-
-    // load audio
-    this.load.audio(
-      'fx_skeleton_alarm',
-      urlBase + 'assets/audio/fx/Skeleton_Alarm.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_attack',
-      urlBase + 'assets/audio/fx/Skeleton_Attack.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_awake',
-      urlBase + 'assets/audio/fx/Skeleton_Awake.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_fs',
-      urlBase + 'assets/audio/fx/Skeleton_FS.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_hurt',
-      urlBase + 'assets/audio/fx/Skeleton_Hurt.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_impact_01',
-      urlBase + 'assets/audio/fx/Skeleton_Impact_01.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_impact_02',
-      urlBase + 'assets/audio/fx/Skeleton_Impact_02.ogg'
-    )
-    this.load.audio(
-      'fx_skeleton_stunned',
-      urlBase + 'assets/audio/fx/Skeleton_Stunned.ogg'
-    )
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
-    // load json
-    this.load.json('translations', urlBase + 'assets/texts.json')
+    // load images
+    this.load.image('pieceA', 'assets/sprites/pattern01.png')
+    this.load.image('pieceB', 'assets/sprites/pattern02.png')
+    this.load.image('pieceC', 'assets/sprites/pattern03.png')
+    this.load.image('pieceD', 'assets/sprites/pattern04.png')
+    this.load.image('pieceE', 'assets/sprites/pattern05.png')
+    this.load.image('nextBtn', 'assets/sprites/button_rectangleRed.png')
+    this.load.image('nineBtn', 'assets/sprites/panel_boltsBlue.png')
 
     // fake loader
     if (this.constants.FAKE_LOADER_ACTIVE) {

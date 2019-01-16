@@ -3,6 +3,7 @@ import Scene from '../scene'
 export default class EditIdleState extends Scene {
   constructor () {
     super({key: 'editIdleState'})
+    this.nextScene = 'optimizeState'
 
     // set all the materials as not selected
     this.selectedMaterial = {
@@ -36,7 +37,8 @@ export default class EditIdleState extends Scene {
   create (params) {
     super.create(params)
 
-    createUI()
+    // add to the scene buttons and other things that will allow player interaction
+    this.createUI()
 
     // add listeners for material selection
     this.io.registerListener('BTN-A', this.handleButton)
@@ -59,13 +61,17 @@ export default class EditIdleState extends Scene {
   }
 
   createUI() {
-    this.optimization = this.add.nineslice(
-      110, 110,   // this is the starting x/y location
-      340, 240,   // the width and height of your object
-      'dlgLarge', // a key to an already loaded image
-      88,         // the width and height to offset for a corner slice
-      24          // (optional) pixels to offset when computing the safe usage area
+    // nineslice(x, y, width, height, key, corner_slice_offset, offset_safe_area)
+    let nineBtn = this.optimization = this.add.nineslice(
+      this.cameras.main.width - 132, this.cameras.main.height - 68,
+      128, 64,
+      'nineBtn',
+      18,
+      2
     )
+    nineBtn
+      .setInteractive()
+      .on('pointerdown', () => this.changeToScene(this.nextScene), this)
   }
 
   handleButton(data) {
