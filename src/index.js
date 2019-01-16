@@ -1,5 +1,9 @@
 import 'phaser'
 
+// -- PLUGINS ------------------------------------------------------------------
+import { Plugin as NineSlicePlugin } from 'phaser3-nineslice'
+
+// -- SCENES -------------------------------------------------------------------
 import constants from './config/constants'
 import BootScene from './scenes/ui/boot'
 
@@ -29,6 +33,9 @@ window.game = new Phaser.Game({
   backgroundColor: constants.BACKGROUND_COLOR,
   pixelArt: true,
   resolution: constants.SCALE,
+  plugins: {
+    global: [ NineSlicePlugin.DefaultCfg ]
+  },
   scene: [
     BootScene,
     BootState,
