@@ -5,6 +5,7 @@ export default class FocusMiniGameScene extends Scene {
   constructor () {
     super({key: 'FocusMiniGameScene'})
 
+    this.optimizeState = null
     this.rotating = {
       pieceA: false,
       pieceB: false,
@@ -13,6 +14,8 @@ export default class FocusMiniGameScene extends Scene {
       pieceE: false
     }
 
+    // prevents the scene to excecute code not necessary when the mini-game finishes,
+    // either by time or by completion
     this.finished = false
   }
 
@@ -21,28 +24,10 @@ export default class FocusMiniGameScene extends Scene {
 
     this.titleText.setVisible(false)
 
-    // add to the scene sprites and other things that will be affected by the player
-    this.createWorld()
+    // get the reference to the scene that will be reading inputs from the player
+    this.optimizeState = this.scene.get('optimizeState')
 
-    // add listeners for news optimization
-    this.io.registerListener('BTN-0', this.handleButton)
-    this.io.registerListener('BTN-1', this.handleButton)
-    this.io.registerListener('BTN-2', this.handleButton)
-    this.io.registerListener('BTN-3', this.handleButton)
-    this.io.registerListener('BTN-4', this.handleButton)
-
-    // add the keys that will be used in the Web standalone version
-    this.keys = this.input.keyboard.addKeys({
-      // assign keys for optimization
-      btn0: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S),
-      btn1: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D),
-      btn2: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F),
-      btn3: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X),
-      btn4: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C)
-    })
-  }
-
-  createWorld() {
+    // add to the scene the sprites and other things that will be affected by the player
     this.piecesContainer = this.add.container(128, 128 + 16)
 
     this.pieceA = this.add.sprite(0, 0, 'pieceA')
@@ -71,32 +56,27 @@ export default class FocusMiniGameScene extends Scene {
 
     let piecesInPlace = 0
 
-    // check optimization buttons that have been pressed
-    this.inputs = {
-      btn0: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
-      btn1: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
-      btn2: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
-      btn3: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
-      btn4: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
-    }
+    // call the update function that reads inputs from the player
+    this.optimizeState.update()
 
-    if (this.inputs.btn0) {
+    // check if any of the buttons used by the mini-game is pressed
+    if (this.optimizeState.inputs.btn0) {
       console.log('pressed optimization button A')
       this.rotatePiece(this.pieceA, 'optA')
     }
-    if (this.inputs.btn1) {
+    if (this.optimizeState.inputs.btn1) {
       console.log('pressed optimization button B')
       this.rotatePiece(this.pieceB, 'optB')
     }
-    if (this.inputs.btn2) {
+    if (this.optimizeState.inputs.btn2) {
       console.log('pressed optimization button C')
       this.rotatePiece(this.pieceC, 'optC')
     }
-    if (this.inputs.btn3) {
+    if (this.optimizeState.inputs.btn3) {
       console.log('pressed optimization button D')
       this.rotatePiece(this.pieceD, 'optD')
     }
-    if (this.inputs.btn4) {
+    if (this.optimizeState.inputs.btn4) {
       console.log('pressed optimization button E')
       this.rotatePiece(this.pieceE, 'optE')
     }
@@ -105,11 +85,19 @@ export default class FocusMiniGameScene extends Scene {
     this.piecesContainer.iterate(piece => piece.angle === 0 && piecesInPlace++)
 
     if (piecesInPlace === this.piecesContainer.length) {
-      alert('A winner is you!!!')
+      // TODO: make something happen before the scene is stopped
       this.finished = true
+      alert('A winner is you!!!')
+
+      this.optimizeState.finishMiniGame()
     }
   }
 
+  /**
+   * Make a given sprite (piece) rotate with a tween.
+   * @param {Phaser.Sprite} piece The sprite (piece) to rotate
+   * @param {String} pieceName The name of the piece that will be marked as rotating
+   */
   rotatePiece(piece, pieceName) {
     if (!this.rotating[pieceName]) {
       this.rotating[pieceName] = true

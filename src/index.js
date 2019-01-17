@@ -7,6 +7,8 @@ import { Plugin as NineSlicePlugin } from 'phaser3-nineslice'
 import constants from './config/constants'
 import BootScene from './scenes/ui/boot'
 import FocusMiniGameScene from './scenes/game/FocusMiniGameScene'
+import TuningMiniGameScene from './scenes/game/TuningMiniGameScene'
+import DramaMiniGameScene from './scenes/game/DramaMiniGameScene'
 
 // STATES
 import BootState from './scenes/states/boot'
@@ -47,7 +49,9 @@ window.game = new Phaser.Game({
     ResultsState,
     SelectState,
     SendState,
-    FocusMiniGameScene
+    FocusMiniGameScene,
+    TuningMiniGameScene,
+    DramaMiniGameScene
   ]
 })
 
