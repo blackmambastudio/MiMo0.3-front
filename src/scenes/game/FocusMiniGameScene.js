@@ -68,30 +68,29 @@ export default class FocusMiniGameScene extends Scene {
 
     // check if any of the buttons used by the mini-game is pressed
     if (this.optimizeState.inputs.btn0) {
-      console.log('pressed optimization button A')
       this.rotatePiece(this.pieceA, 'optA')
     }
     if (this.optimizeState.inputs.btn1) {
-      console.log('pressed optimization button B')
       this.rotatePiece(this.pieceB, 'optB')
     }
     if (this.optimizeState.inputs.btn2) {
-      console.log('pressed optimization button C')
       this.rotatePiece(this.pieceC, 'optC')
     }
     if (this.optimizeState.inputs.btn3) {
-      console.log('pressed optimization button D')
       this.rotatePiece(this.pieceD, 'optD')
     }
     if (this.optimizeState.inputs.btn4) {
-      console.log('pressed optimization button E')
       this.rotatePiece(this.pieceE, 'optE')
     }
 
     // check if the player won the mini-game
     this.piecesContainer.iterate(piece => {
       if (piece.angle === 0) {
+        // when a piece is in place, add opacity to the background image
         this.background.alpha += 0.12
+
+        // TODO: add more feedback animations and sounds here
+
         piecesInPlace++
       }
     })
