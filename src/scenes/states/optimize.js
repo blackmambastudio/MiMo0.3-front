@@ -49,6 +49,9 @@ export default class OptimizeState extends Scene {
     this.scene.launch(this.currentMiniGame)
 
     this.titleText.text += ' - ' + this.currentMiniGame
+
+    // bring this scene to top so the timer is rendered on top of the mini-game
+    this.scene.bringToTop('optimizeState')
   }
 
   update() {
