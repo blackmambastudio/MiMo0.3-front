@@ -63,7 +63,7 @@ class IOManager {
   }
 
   clearLCD(id) {
-    socket.emit('lcd_print', {
+    socket.emit('lcd_clear', {
       lcd_id: id
     })
   }
