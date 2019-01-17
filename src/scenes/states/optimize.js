@@ -15,7 +15,7 @@ export default class OptimizeState extends Scene {
       'TuningMiniGameScene',
       'DramaMiniGameScene'
     ]
-    this.currentMiniGame = this.miniGames[1]
+    this.currentMiniGame = this.miniGames[0]
     // this.currentMiniGame = null // use this while no developing
   }
 

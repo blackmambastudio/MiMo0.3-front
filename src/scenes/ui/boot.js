@@ -91,21 +91,43 @@ export default class BootScene extends Scene {
       frameHeight: 331
     })
 
-    // load fonts
+    // -- FONTS ----------------------------------------------------------------
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
-    // load images
-    this.load.image('pieceA', 'assets/sprites/pieceA.png')
-    this.load.image('pieceB', 'assets/sprites/pieceB.png')
-    this.load.image('pieceC', 'assets/sprites/pieceC.png')
-    this.load.image('pieceD', 'assets/sprites/pieceD.png')
-    this.load.image('pieceE', 'assets/sprites/pieceE.png')
+    // -- IMAGES ---------------------------------------------------------------
+    // ---- Focus mini-game: TV control room
+    this.load.image(
+      'tv_control_room-background',
+      'assets/sprites/tv_control_room.png'
+    )
+    this.load.image(
+      'tv_control_room-pieceA',
+      'assets/sprites/tv_control_room-pieceA-1.png'
+    )
+    this.load.image(
+      'tv_control_room-pieceB',
+      'assets/sprites/tv_control_room-pieceB-1.png'
+    )
+    this.load.image(
+      'tv_control_room-pieceC',
+      'assets/sprites/tv_control_room-pieceC-1.png'
+    )
+    this.load.image(
+      'tv_control_room-pieceD',
+      'assets/sprites/tv_control_room-pieceD-1.png'
+    )
+    this.load.image(
+      'tv_control_room-pieceE',
+      'assets/sprites/tv_control_room-pieceE-1.png'
+    )
+
+    // ---- UI
     this.load.image('nextBtn', 'assets/sprites/button_rectangleRed.png')
     this.load.image('nineBtn', 'assets/sprites/panel_boltsBlue.png')
 
-    // fake loader
+    // -- FAKE LOADER ----------------------------------------------------------
     if (this.constants.FAKE_LOADER_ACTIVE) {
       for (var i = 0; i < 500; i++) {
         this.load.spritesheet(`logo-${i}`, urlBase + 'assets/phaserLogo.png', {

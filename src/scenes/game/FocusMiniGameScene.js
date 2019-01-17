@@ -1,5 +1,4 @@
 import Scene from '../scene'
-import OptimizeState from '../scene'
 
 export default class FocusMiniGameScene extends Scene {
   constructor () {
@@ -13,6 +12,7 @@ export default class FocusMiniGameScene extends Scene {
       pieceD: false,
       pieceE: false
     }
+    this.imageName = 'tv_control_room'
 
     // prevents the scene to excecute code not necessary when the mini-game finishes,
     // either by time or by completion
@@ -28,13 +28,21 @@ export default class FocusMiniGameScene extends Scene {
     this.optimizeState = this.scene.get('optimizeState')
 
     // add to the scene the sprites and other things that will be affected by the player
-    this.piecesContainer = this.add.container(128, 128 + 16)
+    this.background = this.add.image(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height / 2 + 32,
+      this.imageName + '-background'
+    )
 
-    this.pieceA = this.add.sprite(0, 0, 'pieceA')
-    this.pieceB = this.add.sprite(192, 0, 'pieceB')
-    this.pieceC = this.add.sprite(192 * 2, 0, 'pieceC')
-    this.pieceD = this.add.sprite((64 + 32), 128, 'pieceD')
-    this.pieceE = this.add.sprite((64 + 32) + 192, 128, 'pieceE')
+    // create the pieces and put them into a Phaser.Container
+    this.piecesContainer = this.add.container(0, 32)
+
+    // x and y positions took from Illustrator
+    this.pieceA = this.add.image(124, 190, this.imageName + '-pieceA')
+    this.pieceB = this.add.image(320, 190, this.imageName + '-pieceB')
+    this.pieceC = this.add.image(516, 190, this.imageName + '-pieceC')
+    this.pieceD = this.add.image(222, 324, this.imageName + '-pieceD')
+    this.pieceE = this.add.image(418, 324, this.imageName + '-pieceE')
 
     this.piecesContainer.add(this.pieceA)
     this.piecesContainer.add(this.pieceB)
@@ -42,11 +50,9 @@ export default class FocusMiniGameScene extends Scene {
     this.piecesContainer.add(this.pieceD)
     this.piecesContainer.add(this.pieceE)
 
-    // this.piecesContainer.setScale(0.5)
-
     // rotate the pieces to a random degree and start the mini-game
     this.piecesContainer
-      .iterate(piece => piece.angle = 0 + (90 * Phaser.Math.Between(0, 3)))
+      .iterate(piece => piece.angle = 90 * Phaser.Math.Between(1, 3))
   }
 
   update(time, delta) {
@@ -54,6 +60,7 @@ export default class FocusMiniGameScene extends Scene {
       return
     }
 
+    this.background.setAlpha(0.4)
     let piecesInPlace = 0
 
     // call the update function that reads inputs from the player
@@ -82,20 +89,25 @@ export default class FocusMiniGameScene extends Scene {
     }
 
     // check if the player won the mini-game
-    this.piecesContainer.iterate(piece => piece.angle === 0 && piecesInPlace++)
+    this.piecesContainer.iterate(piece => {
+      if (piece.angle === 0) {
+        this.background.alpha += 0.12
+        piecesInPlace++
+      }
+    })
 
     if (piecesInPlace === this.piecesContainer.length) {
       // TODO: make something happen before the scene is stopped
       this.finished = true
       alert('A winner is you!!!')
 
-      this.optimizeState.finishMiniGame()
+      // this.optimizeState.finishMiniGame()
     }
   }
 
   /**
-   * Make a given sprite (piece) rotate with a tween.
-   * @param {Phaser.Sprite} piece The sprite (piece) to rotate
+   * Make a given image (piece) rotate with a tween.
+   * @param {Phaser.Image} piece The image (piece) to rotate
    * @param {String} pieceName The name of the piece that will be marked as rotating
    */
   rotatePiece(piece, pieceName) {
