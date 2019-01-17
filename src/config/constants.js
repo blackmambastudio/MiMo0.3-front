@@ -29,7 +29,7 @@ const FAKE_LOADER_ACTIVE = false
 const RUNNING_STATS = true
 
 // display dat.gui plugin
-const DAT_GUI_ENABLE = true
+const DAT_GUI_ENABLE = false
 
 const AFTER_BOOT_SCENE = 'bootState'
 

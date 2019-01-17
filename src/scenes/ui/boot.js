@@ -83,7 +83,7 @@ export default class BootScene extends Scene {
     // load files
     let urlBase = ''
     if (env == 'PRODUCTION') {
-      urlBase = awsPrefix
+      urlBase = '/static/'
     }
     // load logo
     this.load.spritesheet('logo', urlBase + 'assets/phaserLogo.png', {
@@ -100,32 +100,32 @@ export default class BootScene extends Scene {
     // ---- Focus mini-game: TV control room
     this.load.image(
       'tv_control_room-background',
-      'assets/sprites/tv_control_room.png'
+      urlBase +'assets/sprites/tv_control_room.png'
     )
     this.load.image(
       'tv_control_room-pieceA',
-      'assets/sprites/tv_control_room-pieceA-1.png'
+      urlBase +'assets/sprites/tv_control_room-pieceA-1.png'
     )
     this.load.image(
       'tv_control_room-pieceB',
-      'assets/sprites/tv_control_room-pieceB-1.png'
+      urlBase +'assets/sprites/tv_control_room-pieceB-1.png'
     )
     this.load.image(
       'tv_control_room-pieceC',
-      'assets/sprites/tv_control_room-pieceC-1.png'
+      urlBase +'assets/sprites/tv_control_room-pieceC-1.png'
     )
     this.load.image(
       'tv_control_room-pieceD',
-      'assets/sprites/tv_control_room-pieceD-1.png'
+      urlBase +'assets/sprites/tv_control_room-pieceD-1.png'
     )
     this.load.image(
       'tv_control_room-pieceE',
-      'assets/sprites/tv_control_room-pieceE-1.png'
+      urlBase +'assets/sprites/tv_control_room-pieceE-1.png'
     )
 
     // ---- UI
-    this.load.image('nextBtn', 'assets/sprites/button_rectangleRed.png')
-    this.load.image('nineBtn', 'assets/sprites/panel_boltsBlue.png')
+    this.load.image('nextBtn', urlBase +'assets/sprites/button_rectangleRed.png')
+    this.load.image('nineBtn', urlBase +'assets/sprites/panel_boltsBlue.png')
 
     // -- FAKE LOADER ----------------------------------------------------------
     if (this.constants.FAKE_LOADER_ACTIVE) {

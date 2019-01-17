@@ -1,5 +1,5 @@
 import io from 'socket.io-client';
-const socket = io('http://localhost:8000',
+const socket = io('http://192.168.0.53:8000',
   {reconnectionAttempts: 3}
 )
 console.log(socket)
@@ -51,6 +51,21 @@ class IOManager {
 
   registerListener (action, callback) {
     this.listeners[action] = callback
+  }
+
+  displayOnLCD(id, message, line) {
+    socket.emit('lcd_print', {
+      lcd_id: id,
+      message: message,
+      line: line
+    })
+    console.log('print on lcd')
+  }
+
+  clearLCD(id) {
+    socket.emit('lcd_print', {
+      lcd_id: id
+    })
   }
 }
 

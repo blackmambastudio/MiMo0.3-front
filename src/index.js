@@ -27,7 +27,7 @@ import gs from './config/gameStats'
 import tunner from './utils/tunner'
 
 window.game = new Phaser.Game({
-  type: Phaser.AUTO,
+  type: Phaser.CANVAS,
   parent: 'content',
   width: constants.WIDTH,
   height: constants.HEIGHT,
