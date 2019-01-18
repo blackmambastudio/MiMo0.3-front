@@ -149,7 +149,7 @@ export default class TutorialState extends Scene {
           callbackScope: this
         })
 
-        this.time.delayedCall(10000, this.highlightMaterial, null, this)
+        this.time.delayedCall(5000, this.highlightMaterial, null, this)
       }
     })
   }
@@ -174,7 +174,7 @@ export default class TutorialState extends Scene {
         alpha: 1,
         duration: 500 + (1000 * icon.index),
         callback: _ => {
-          this.time.delayedCall(10000, this.highlightOptimization, null, this)
+          this.time.delayedCall(6000, this.highlightOptimization, null, this)
         }
       })
     })
@@ -205,7 +205,7 @@ export default class TutorialState extends Scene {
   }
 
   showWelcome() {
-    this.titleText.setText('-- M.I.M.O. VERIFICATION COMLETED --')
+    this.titleText.setText('-- M.I.M.O. VERIFICATION COMPLETED --')
       this.subtitleText.setText('All works fine.\nWelcome! you can start manufacturing the news.')
     
     this.printersContainer.iterate(icon => {
@@ -230,7 +230,7 @@ export default class TutorialState extends Scene {
       duration: 2000,
       callback: _ => {
         this.time.delayedCall(
-          5000,
+          4500,
           _ => this.changeToScene(this.nextScene),
           null,
           this

@@ -88,7 +88,7 @@ export default class BootState extends Scene {
         this.io.clearLCD(22+i)
       }
     }, [], this)
-    this.time.delayedCall(4300, () => {
+    this.time.delayedCall(4400, () => {
       console.log('loading end')
       this.changeToScene(this.nextScene)
     }, [], this)
