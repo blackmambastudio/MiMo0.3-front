@@ -4,57 +4,74 @@ export default class EditIdleState extends Scene {
   constructor () {
     super({key: 'editIdleState'})
     this.nextScene = 'optimizeState'
+    this.sequence = []
+    this.nextId = 0
 
+    this.newsDescription = "Komura has said that antiriot squads will exert control over protests during his government. He emphasized: Companies being affected by a few is something we won't tolerate."
     // set all the materials as not selected
+
+    //this.image = 
+  }
+
+  create (params) {
+    super.create(params)
+
     this.selectedMaterial = {
       mtlL1: {
         pressed: false,
         status: 0,
         lightID: 15,
         LCD_ID: 22,
-        message: 'President Elected'
+        message: 'Oppressor......... country..........',
+        messageSelected: '->.Oppressor......... ...country..........',
+        image: this.add.image(0, 0, 'mp_countryOppressive')
       },
       mtlL2: {
         pressed: false,
         status: 0,
         lightID: 29,
-        LCD_ID: 26,
-        message: 'Public Declaration'
+        LCD_ID: 23,
+        message: 'People.......... working.........',
+        messageSelected: '->.People....... ...working......',
+        image: this.add.image(0, 0, 'mp_womenWorking')
       },
       mtlL3: {
         pressed: false,
         status: 0,
         lightID: 31,
         LCD_ID: 24,
-        message: 'Judges'
+        message: 'Periphery..........',
+        messageSelected: '->.Periphery..........',
+        image: this.add.image(0, 0, 'mp_womenWorking')
       },
       mtlR1: {
         pressed: false,
         status: 0,
         lightID: 33,
         LCD_ID: 25,
-        message: 'Complot'
+        message: '...........Happy ..........family',
+        messageSelected: '........Happy.<- .......family...',
+        image: this.add.image(0, 0, 'mp_familyHappy')
       },
       mtlR2: {
         pressed: false,
         status: 0,
         lightID: 35,
-        LCD_ID: 23,
-        message: 'Boicot'
+        LCD_ID: 26,
+        message: '...........Women .........working',
+        messageSelected: '........Women.<- ......working...',
+        image: this.add.image(0, 0, 'mp_womenWorking')
       },
       mtlR3: {
         pressed: false,
         status: 0,
         lightID: 13,
         LCD_ID: 27,
-        message: 'Terrorist attack'
+        message: '.......Abandoned .........factory',
+        messageSelected: '....Abandoned.<- ......factory...',
+        image: this.add.image(0, 0, 'mp_factoryAbandoned')
       }
     }
-  }
-
-  create (params) {
-    super.create(params)
-
     // add to the scene buttons and other things that will allow player interaction
     this.createUI()
     
@@ -83,6 +100,9 @@ export default class EditIdleState extends Scene {
     Object.keys(this.selectedMaterial).forEach(key => {
       let materialHW = this.selectedMaterial[key]
       this.io.displayOnLCD(materialHW.LCD_ID, materialHW.message, 1)
+      materialHW.image.visible = false
+      materialHW.image.setOrigin(0, 0)
+      materialHW.image.setScale(0.5, 0.5)
     })
   }
 
@@ -111,9 +131,9 @@ export default class EditIdleState extends Scene {
           (material.status + 1) & 1
 
         if(material.status>0) {
-          this.io.turnOnLight(material.lightID)
+          this.addMaterialToSequence(material)
         }else {
-          this.io.turnOffLight(material.lightID)
+          this.removeMaterialToSequence(material)
         }
       }
     }
@@ -121,6 +141,28 @@ export default class EditIdleState extends Scene {
       //console.log(data)
       this.selectedMaterial[data.action].pressed = false
     }
+  }
+
+  addMaterialToSequence(material) {
+    this.io.turnOnLight(material.lightID)
+    this.io.clearLCD(material.LCD_ID)
+    this.io.displayOnLCD(material.LCD_ID, material.messageSelected, 1)
+
+    material.image.visible = true
+    material.image.x = this.nextId*50
+    material.image.y = this.nextId*40
+    this.children.bringToTop(material)
+    this.nextId++;
+  }
+
+  removeMaterialToSequence(material) {
+    this.io.turnOffLight(material.lightID)   
+    this.io.clearLCD(material.LCD_ID)
+    this.io.displayOnLCD(material.LCD_ID, material.message, 1)
+
+    material.image.visible = false
+    
+    this.nextId--;
   }
 
   buttonF(data) {
