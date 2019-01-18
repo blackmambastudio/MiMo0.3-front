@@ -65,6 +65,13 @@ export default class OptimizeState extends Scene {
         this.startMiniGame()
       }, null, this)
     }, null, this)
+    this.inputs = {
+      btn0: false,
+      btn1: false,
+      btn2: false,
+      btn3: false,
+      btn4: false
+    }
   }
 
   registerListeners() {
@@ -88,12 +95,34 @@ export default class OptimizeState extends Scene {
 
   update() {
     // check optimization buttons that have been pressed
+    let prevInput = this.inputs
     this.inputs = {
       btn0: this.keys.btn0.isDown || this.io.Inputs['BTN-0'].pressed,
       btn1: this.keys.btn1.isDown || this.io.Inputs['BTN-1'].pressed,
       btn2: this.keys.btn2.isDown || this.io.Inputs['BTN-2'].pressed,
       btn3: this.keys.btn3.isDown || this.io.Inputs['BTN-3'].pressed,
       btn4: this.keys.btn4.isDown || this.io.Inputs['BTN-4'].pressed
+    }
+    if(this.inputs.btn0 != prevInput.btn0) {
+      if(prevInput.btn0) this.io.turnOffLight(15)
+      else this.io.turnOnLight(15)
+    }
+
+    if(this.inputs.btn1 != prevInput.btn1) {
+      if(prevInput.btn1) this.io.turnOffLight(29)
+      else this.io.turnOnLight(29)
+    }
+    if(this.inputs.btn2 != prevInput.btn2) {
+      if(prevInput.btn2) this.io.turnOffLight(31)
+      else this.io.turnOnLight(31)
+    }
+    if(this.inputs.btn3 != prevInput.btn3) {
+      if(prevInput.btn3) this.io.turnOffLight(33)
+      else this.io.turnOnLight(33)
+    }
+    if(this.inputs.btn4 != prevInput.btn4) {
+      if(prevInput.btn4) this.io.turnOffLight(35)
+      else this.io.turnOnLight(35)
     }
   }
 

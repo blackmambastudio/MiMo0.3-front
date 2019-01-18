@@ -3,17 +3,13 @@ import Scene from '../scene'
 export default class BootState extends Scene {
   constructor () {
     super({key: 'bootState'})
-    // this.nextScene = 'tutorialState' // use this when not developing
-    this.nextScene = 'optimizeState'
+    this.nextScene = 'tutorialState' // use this when not developing
+    //this.nextScene = 'optimizeState'
   }
 
   create (params) {
     super.create(params)
-    /*
-    for (var i = 0; i < 6; i++) {
-      this.io.clearLCD(22+i)
-    }
-
+    
     let messages = ["booting", "mimo is power", "mcorp rulz", "#10yearchallenge", "guachafita", "juakers"]
 
     for(let i = 0; i<6; i++){
@@ -27,64 +23,40 @@ export default class BootState extends Scene {
       }, [], this)
     }
     
-    var interval = 50
-    for (var i = 0; i < 10; i++) {
-      var delay = i*7*interval
-      this.time.delayedCall(interval + delay, () => {
-        this.io.setLedLight('0', [1, 0, 0])
-      }, [], this)
-        
-      this.time.delayedCall(interval*2 + delay, () => {
-        this.io.setLedLight('0', [0, 1, 0])
-      }, [], this)
-      this.time.delayedCall(interval*3 + delay, () => {
-        this.io.setLedLight('0', [0, 1, 1])
-      }, [], this)
-      this.time.delayedCall(interval*4 + delay, () => {
-        this.io.setLedLight('0', [0, 0, 1])
-      }, [], this)
-      this.time.delayedCall(interval*5 + delay, () => {
-        this.io.setLedLight('0', [1, 0, 1])
-      }, [], this)
-      this.time.delayedCall(interval*6 + delay, () => {
-        this.io.setLedLight('0', [1, 1, 0])
-      }, [], this)
-      this.time.delayedCall(interval*7 + delay, () => {
-        this.io.setLedLight('0', [1, 1, 1])
-      }, [], this)
-    }
-  */
-//    this.io.resetButtonStates()
+    this.io.resetButtonStates()
 
     for (var i = 0; i < 6; i++) {
       this.io.displayOnLCD(22+i, 'loading...', 1)
     }
 
-    for (var i = 0; i < 4; i++) {
-      let delay = 1200*i + 500
-      this.blink(15, delay, 300)
-      this.blink(33, delay, 300)
-      this.blink(29, delay+100, 300)
-      this.blink(35, delay+100, 300)
-      this.blink(31, delay+200, 300)
-      this.blink(13, delay+200, 300)
+    let spacingTime = 200
+    let delay = 200
+    this.playLightSequenceComplex([15,29,31,13,35,33], delay, spacingTime)
 
-      this.blink(31, delay+600, 300)
-      this.blink(13, delay+600, 300)
-      this.blink(29, delay+700, 300)
-      this.blink(35, delay+700, 300)
-      this.blink(15, delay+800, 300)
-      this.blink(33, delay+800, 300)
-    }
+    let delay2 = spacingTime*5 + delay
+    let sequenceB = [
+      [15, delay2+spacingTime*0, spacingTime], [33, delay2+spacingTime*0, spacingTime],
+      [29, delay2+spacingTime*1, spacingTime], [35, delay2+spacingTime*1, spacingTime],
+      [31, delay2+spacingTime*2, spacingTime], [13, delay2+spacingTime*2, spacingTime],
+      [29, delay2+spacingTime*3, spacingTime], [35, delay2+spacingTime*3, spacingTime],
+      [15, delay2+spacingTime*4, spacingTime], [33, delay2+spacingTime*4, spacingTime],
+      [29, delay2+spacingTime*5, spacingTime], [35, delay2+spacingTime*5, spacingTime],
+      [31, delay2+spacingTime*6, spacingTime], [13, delay2+spacingTime*6, spacingTime],
+      [29, delay2+spacingTime*7, spacingTime], [35, delay2+spacingTime*7, spacingTime],
+      [15, delay2+spacingTime*8, spacingTime], [33, delay2+spacingTime*8, spacingTime]
+    ]
+    this.playLightSequence(sequenceB)    
+    let delay3 = delay2+spacingTime*9
 
-    //this.io.turnOffLight(35)
-    //this.io.turnOnLight(37)
-    this.time.delayedCall(4000, () => {
+    this.playLightSequenceComplex([15,29,31,13,35,33], delay3, spacingTime)
+    
+    this.time.delayedCall(4200, () => {
       for (var i = 0; i < 6; i++) {
         this.io.clearLCD(22+i)
       }
     }, [], this)
-    this.time.delayedCall(4500, () => {
+    this.time.delayedCall(4300, () => {
+      console.log('loading end')
       this.changeToScene(this.nextScene)
     }, [], this)
   }
@@ -96,6 +68,21 @@ export default class BootState extends Scene {
     this.time.delayedCall(start+delay, () => {
       this.io.turnOffLight(id)
     }, [], this)    
+  }
+
+  playLightSequence(sequence){
+    console.log(sequence)
+    for (var i = 0; i < sequence.length; i++) {
+      let light = sequence[i]
+      this.blink(light[0], light[1], light[2])
+    }
+  }
+
+  playLightSequenceComplex(sequence, delay, spacingTime){
+    for (var i = 0; i < sequence.length; i++) {
+      sequence[i] = [sequence[i], delay+spacingTime*0, spacingTime*4]  
+    }
+    this.playLightSequence(sequence)
   }
 
 }
