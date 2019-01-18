@@ -5,7 +5,14 @@ export default class TutorialState extends Scene {
     super({key: 'tutorialState'})
     this.nextScene = 'editIdleState' // original
     
-    this.materialButtons = []
+    this.materialKeys = [
+      'mtlL1',
+      'mtlL2',
+      'mtlL3',
+      'mtlR1',
+      'mtlR2',
+      'mtlR3'
+    ]
     this.materialColors = [
       0xFC003C,
       0xFFF000,
@@ -33,26 +40,53 @@ export default class TutorialState extends Scene {
     this.mimo_blueprint = this.add.image(640, 265, 'mimo_blueprint')
     
     // material icons
+    this.materialIconsContainer = this.add.container(0, 0)
     for (let index = 0; index < 6; index++) {
       let image = this.add.image(
         this.materialPositions[index].x,
         this.materialPositions[index].y,
-        'material_ico'
+        this.materialKeys[index]
       )
-      image.tintFill = true
-      image.setTint(this.materialColors[index])
-      this.materialButtons.push(image)
+      this.materialIconsContainer.add(image)
+      image.alpha = 0
     }
 
-    this.optimization_ico = this.add.image(640, 394, 'optimization_ico')
+    this.opt_knobs = this.add.image(640, 325, 'opt_knobs')
+    this.opt_buttons = this.add.image(640, 447, 'opt_buttons')
 
-    this.printer01 = this.make.image(380, 177, 'printer-01')
-    // this.printer02 = this.make.image(0, 0, 'printer-02')
-    // this.printer03 = this.make.image(0, 0, 'printer-03')
+    this.opt_knobs.setAlpha(0)
+    this.opt_buttons.setAlpha(0)
+
+    this.printer01 = this.add.image(380, 181, 'printer-01')
+    this.printer02 = this.add.image(380, 181, 'printer-02')
+    this.printer03 = this.add.image(380, 181, 'printer-03')
+
+    this.printer01.setOrigin(0.5, 1)
+    this.printer02.setOrigin(0.5, 1)
+    this.printer03.setOrigin(0.5, 1)
+
+    this.printer01.setAlpha(0)
+    this.printer02.setAlpha(0)
+    this.printer03.setAlpha(0)
+
+    this.startAnimations()
 
     /* this.time.delayedCall(1000, () => {
       this.changeToScene(this.nextScene)
     }, [], this) */
+  }
+
+  startAnimations() {
+    this.tweens.add({
+      targets: [this.logo],
+      alpha: 1,
+      duration: 2000,
+      ease: "Cubic.easeOut", 
+      callbackScope: this,
+      onComplete: function(tween, targets) {
+        // TODO: ???
+      }
+    });
   }
 
 }

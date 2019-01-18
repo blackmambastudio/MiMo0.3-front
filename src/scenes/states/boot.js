@@ -23,16 +23,11 @@ export default class BootState extends Scene {
     // TODO: play the fancy sound effect of MCorp
     this.tweens.add({
       targets: [this.logo],
-      // angle destination
       alpha: 1,
-      // tween duration
-      duration: 4500,
-      // tween easing
+      duration: 2000,
       ease: "Cubic.easeOut", 
-      // callback scope
       callbackScope: this,
       yoyo: true,
-      // function to be executed once the tween has been completed
       onComplete: function(tween, targets) {
         this.changeToScene(this.nextScene)
       }
