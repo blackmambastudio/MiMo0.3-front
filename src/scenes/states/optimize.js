@@ -36,6 +36,7 @@ export default class OptimizeState extends Scene {
       text: 'READY',
       style: this.fonts.default
     })
+    this.preparationText.setFontFamily('vcrosdmono')
     this.preparationText.setTint('0xFFFF00')
     this.preparationText.setStroke('#FFFFFF', 2)
     this.preparationText.setFontSize(64)
@@ -126,9 +127,15 @@ export default class OptimizeState extends Scene {
 
   finishMiniGame() {
     this.countdown.remove()
-    this.scene.stop(this.currentMiniGame)
-    this.preparationText.text = 'Results: ' + this.score + '%'
+    this.preparationText.text = 'RESULTS: ' + this.score + '%'
     this.preparationText.setVisible(true)
+
+    this.time.delayedCall(
+      3000,
+      _ => {this.scene.stop(this.currentMiniGame)},
+      null,
+      this
+    )
 
     // TODO: show something to the player... like a confirmation message
     // that informs her that the edited and optimized news will be telecasted, and

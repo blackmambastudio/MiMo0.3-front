@@ -2,7 +2,7 @@
 
 export default {
   default: {
-    font: '20px monospace',
+    font: '20px vcrosdmono',
     fill: '#ffffff'
   },
   'BM_keney': {

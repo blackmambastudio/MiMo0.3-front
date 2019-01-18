@@ -47,6 +47,7 @@ export default class TutorialState extends Scene {
       style: this.fonts.default
     })
     this.subtitleText.setOrigin(0.5)
+    this.subtitleText.setFontFamily('vcrosdmono')
     this.subtitleText.setFontSize(32)
     this.subtitleText.setAlign('center')
 
@@ -136,7 +137,7 @@ export default class TutorialState extends Scene {
       duration: 1000,
       callback: _ => {
         this.titleText.setText('VERIFYING PRINTER')
-        this.subtitleText.setText('Read each incoming event and use the material\nattached to it to transform it into the news')
+        this.subtitleText.setText('READ EACH INCOMING EVENT AND USE THE MATERIAL\nATTACHED TO IT TO TRANSFORM IT INTO THE NEWS')
 
         this.printerAnimation = this.time.addEvent({
           delay: 500,
@@ -166,7 +167,7 @@ export default class TutorialState extends Scene {
     this.printerAnimation.remove()
 
     this.titleText.setText('VERIFYING MATERIAL PANEL')
-    this.subtitleText.setText('Press each button to select the material\nyou want to use to evoke an emotion in the current news')
+    this.subtitleText.setText('PRESS EACH BUTTON TO SELECT THE MATERIAL\nYOU WANT TO USE TO EVOKE AN EMOTION IN THE CURRENT NEWS')
 
     this.materialIconsContainer.iterate(icon => {
       this.useAlphaTween({
@@ -190,7 +191,7 @@ export default class TutorialState extends Scene {
     })
 
     this.titleText.setText('VERIFYING OPTIMIZATION PANEL')
-    this.subtitleText.setText('Use the knobs and buttons to improve the impact\nof the evoked emotion')
+    this.subtitleText.setText('USE THE KNOBS AND BUTTONS TO IMPROVE THE IMPACT\nOF THE EVOKED EMOTION')
 
     this.optimizationIconsContainer.iterate(icon => {
       this.useAlphaTween({
@@ -205,8 +206,8 @@ export default class TutorialState extends Scene {
   }
 
   showWelcome() {
-    this.titleText.setText('-- M.I.M.O. VERIFICATION COMLETED --')
-      this.subtitleText.setText('All works fine.\nWelcome! you can start manufacturing the news.')
+    this.titleText.setText('-- M.I.M.O. VERIFICATION COMPLETE --')
+      this.subtitleText.setText('ALL SYSTEMS WORKING.\nWELCOME!\nYOU CAN START MANUFACTURING THE NEWS.')
     
     this.printersContainer.iterate(icon => {
       this.useAlphaTween({
