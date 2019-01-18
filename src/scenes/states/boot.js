@@ -3,7 +3,8 @@ import Scene from '../scene'
 export default class BootState extends Scene {
   constructor () {
     super({key: 'bootState'})
-    this.nextScene = 'tutorialState'
+    // this.nextScene = 'tutorialState' // use this when not developing
+    this.nextScene = 'optimizeState'
   }
 
   create (params) {

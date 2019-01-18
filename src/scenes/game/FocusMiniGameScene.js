@@ -13,10 +13,12 @@ export default class FocusMiniGameScene extends Scene {
       pieceE: false
     }
     this.imageName = 'tv_control_room'
+    this.pieceValue = 0
 
     // prevents the scene to excecute code not necessary when the mini-game finishes,
     // either by time or by completion
     this.finished = false
+    this.started = false
   }
 
   create (params) {
@@ -33,6 +35,7 @@ export default class FocusMiniGameScene extends Scene {
       this.sys.game.config.height / 2 + 32,
       this.imageName + '-background'
     )
+    this.background.setAlpha(0)
 
     // create the pieces and put them into a Phaser.Container
     this.piecesContainer = this.add.container(0, 32)
@@ -53,15 +56,20 @@ export default class FocusMiniGameScene extends Scene {
     // rotate the pieces to a random degree and start the mini-game
     this.piecesContainer
       .iterate(piece => piece.angle = 90 * Phaser.Math.Between(1, 3))
+    this.piecesContainer.setAlpha(0)
+
+    // setup data
+    this.pieceValue = this.optimizeState.maxScore / this.piecesContainer.length
   }
 
   update(time, delta) {
-    if (this.finished === true) {
+    if (this.finished === true || this.started === false) {
       return
     }
 
     this.background.setAlpha(0.4)
     let piecesInPlace = 0
+    this.optimizeState.score = 0
 
     // call the update function that reads inputs from the player
     this.optimizeState.update()
@@ -92,15 +100,15 @@ export default class FocusMiniGameScene extends Scene {
         // TODO: add more feedback animations and sounds here
 
         piecesInPlace++
+        this.optimizeState.score = piecesInPlace * this.pieceValue
       }
     })
 
     if (piecesInPlace === this.piecesContainer.length) {
-      // TODO: make something happen before the scene is stopped
       this.finished = true
-      alert('A winner is you!!!')
+      // TODO: make something happen before the scene is stopped
 
-      // this.optimizeState.finishMiniGame()
+      this.optimizeState.finishMiniGame()
     }
   }
 
@@ -130,5 +138,10 @@ export default class FocusMiniGameScene extends Scene {
         }
       });
     }
+  }
+
+  start() {
+    this.started = true
+    this.piecesContainer.setAlpha(1)
   }
 }

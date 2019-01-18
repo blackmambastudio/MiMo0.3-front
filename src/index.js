@@ -34,7 +34,7 @@ window.game = new Phaser.Game({
   parent: document.getElementById('gameContainer'),
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
-  pixelArt: true,
+  pixelArt: false,
   resolution: constants.SCALE,
   plugins: {
     global: [ NineSlicePlugin.DefaultCfg ]
