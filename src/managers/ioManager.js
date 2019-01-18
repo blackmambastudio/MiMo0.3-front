@@ -43,8 +43,8 @@ class IOManager {
     });
 
     this.socket.on('gpio', data => {
-      console.log('Read from GPIO: ' + data);
-      console.log(data);
+      //console.log('Read from GPIO: ' + data);
+      //console.log(data);
       try{
         this.Inputs[data.action].pressed = data.status
         let event = this.listeners[data.action]
@@ -100,14 +100,22 @@ class IOManager {
   turnOnLight(id){
     this.socket.emit('btn_led', {
       'btn_led_id': id,
-      'btn_led_state': 'True'
+      'btn_led_state': true
     })
   }
 
   turnOffLight(id){
     this.socket.emit('btn_led', {
       'btn_led_id': id,
-      'btn_led_state': 'False'
+      'btn_led_state': false
+    })
+  }
+
+  printerMessage(){
+    this.socket.emit('printer', {
+      'user': 'MiMo Console',
+      'date': 'Oct 30  1982',
+      'text': ">> INCOMING EVENT <<\n\nTHE PRESIDENTIAL CANDIDATE FULANO SAYS HE WILL ALWAYS SUPPORT TELMAR AS LONG AS THAT DOESN'T JEOPARDIZE OUR RELATIONSHIP WITH HUNAGARA'S GOVERMENT."
     })
   }
 

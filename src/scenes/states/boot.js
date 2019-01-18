@@ -54,23 +54,37 @@ export default class BootState extends Scene {
       }, [], this)
     }
   */
-    this.io.resetButtonStates()
-    
-    this.blink(27, 500, 700)
-    this.blink(33, 500, 700)
-    this.blink(29, 800, 700)
-    this.blink(35, 800, 700)
-    this.blink(31, 1100, 700)
-    this.blink(37, 1100, 700)
+//    this.io.resetButtonStates()
 
-    this.blink(31, 2200, 700)
-    this.blink(37, 2200, 700)
-    this.blink(29, 2500, 700)
-    this.blink(35, 2500, 700)
-    this.blink(27, 2800, 700)
-    this.blink(33, 2800, 700)
+    for (var i = 0; i < 6; i++) {
+      this.io.displayOnLCD(22+i, 'loading...', 1)
+    }
 
+    for (var i = 0; i < 4; i++) {
+      let delay = 1200*i + 500
+      this.blink(15, delay, 300)
+      this.blink(33, delay, 300)
+      this.blink(29, delay+100, 300)
+      this.blink(35, delay+100, 300)
+      this.blink(31, delay+200, 300)
+      this.blink(13, delay+200, 300)
+
+      this.blink(31, delay+600, 300)
+      this.blink(13, delay+600, 300)
+      this.blink(29, delay+700, 300)
+      this.blink(35, delay+700, 300)
+      this.blink(15, delay+800, 300)
+      this.blink(33, delay+800, 300)
+    }
+
+    //this.io.turnOffLight(35)
+    //this.io.turnOnLight(37)
     this.time.delayedCall(4000, () => {
+      for (var i = 0; i < 6; i++) {
+        this.io.clearLCD(22+i)
+      }
+    }, [], this)
+    this.time.delayedCall(4500, () => {
       this.changeToScene(this.nextScene)
     }, [], this)
   }
@@ -80,7 +94,7 @@ export default class BootState extends Scene {
       this.io.turnOnLight(id)
     }, [], this)
     this.time.delayedCall(start+delay, () => {
-      this.io.turnOnLight(id)
+      this.io.turnOffLight(id)
     }, [], this)    
   }
 

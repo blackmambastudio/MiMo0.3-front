@@ -10,7 +10,7 @@ export default class TutorialState extends Scene {
   create (params) {
     super.create(params)
 
-    this.time.delayedCall(2000, () => {
+    this.time.delayedCall(1000, () => {
       this.changeToScene(this.nextScene)
     }, [], this)
   }
