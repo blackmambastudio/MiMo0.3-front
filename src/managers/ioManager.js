@@ -70,12 +70,23 @@ class IOManager {
   }
 
   displayOnLCD(id, message, line) {
+    let secondLine = ''
+    let splitted = message.split(' ')
+    message = splitted[0]
+    secondLine = splitted[1]
+
     this.socket.emit('lcd_print', {
       lcd_id: id,
-      message: message,
-      line: line
+      message: message.replace(/\./g, ' '),
+      line: line || 1
     })
-    console.log('print on lcd')
+    if(secondLine) {
+      this.socket.emit('lcd_print', {
+        lcd_id: id,
+        message: secondLine.replace(/\./g, ' '),
+        line: 2
+      })
+    }
   }
 
   clearLCD(id) {
@@ -112,6 +123,7 @@ class IOManager {
   }
 
   printerMessage(){
+    return true
     this.socket.emit('printer', {
       'user': 'MiMo Console',
       'date': 'Oct 30  1982',

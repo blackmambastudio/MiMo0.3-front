@@ -127,6 +127,17 @@ export default class BootScene extends Scene {
     this.load.image('nextBtn', urlBase +'assets/sprites/button_rectangleRed.png')
     this.load.image('nineBtn', urlBase +'assets/sprites/panel_boltsBlue.png')
 
+
+    // -- material
+    let materials = ['mp_countryOppressive', 'mp_factoryAbandoned', 'mp_familyHappy', 'mp_womenWorking']
+    for (var i = 0; i < materials.length; i++) {
+      let material = materials[i]
+      this.load.image(
+        material,
+        urlBase +'assets/material/'+material+'.png'
+      )
+    }
+
     // -- FAKE LOADER ----------------------------------------------------------
     if (this.constants.FAKE_LOADER_ACTIVE) {
       for (var i = 0; i < 500; i++) {
