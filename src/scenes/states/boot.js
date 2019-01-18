@@ -54,9 +54,34 @@ export default class BootState extends Scene {
       }, [], this)
     }
   */
-    this.time.delayedCall(1000, () => {
+    this.io.resetButtonStates()
+    
+    this.blink(27, 500, 700)
+    this.blink(33, 500, 700)
+    this.blink(29, 800, 700)
+    this.blink(35, 800, 700)
+    this.blink(31, 1100, 700)
+    this.blink(37, 1100, 700)
+
+    this.blink(31, 2200, 700)
+    this.blink(37, 2200, 700)
+    this.blink(29, 2500, 700)
+    this.blink(35, 2500, 700)
+    this.blink(27, 2800, 700)
+    this.blink(33, 2800, 700)
+
+    this.time.delayedCall(4000, () => {
       this.changeToScene(this.nextScene)
     }, [], this)
+  }
+
+  blink(id, start, delay){
+    this.time.delayedCall(start, () => {
+      this.io.turnOnLight(id)
+    }, [], this)
+    this.time.delayedCall(start+delay, () => {
+      this.io.turnOnLight(id)
+    }, [], this)    
   }
 
 }

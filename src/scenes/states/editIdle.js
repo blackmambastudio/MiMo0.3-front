@@ -9,27 +9,45 @@ export default class EditIdleState extends Scene {
     this.selectedMaterial = {
       mtlL1: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 27,
+        LCD_ID: 0,
+        message: 'President Elected'
       },
       mtlL2: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 29,
+        LCD_ID: 0,
+        message: 'Public Declaration'
       },
       mtlL3: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 31,
+        LCD_ID: 0,
+        message: 'Judges'
       },
       mtlR1: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 33,
+        LCD_ID: 0,
+        message: 'Complot'
       },
       mtlR2: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 35,
+        LCD_ID: 0,
+        message: 'Boicot'
       },
       mtlR3: {
         pressed: false,
-        status: 0
+        status: 0,
+        lightID: 37,
+        LCD_ID: 0,
+        message: 'Terrorist attack'
       }
     }
   }
@@ -58,6 +76,10 @@ export default class EditIdleState extends Scene {
       btnE: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.G),
       btnF: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.V)
     })
+
+    this.selectedMaterial.forEach(materialHW => {
+      //this.io.displayOnLCD(materialHW.LCD_ID, materialHW.message, 1)
+    })
   }
 
   createUI() {
@@ -76,18 +98,24 @@ export default class EditIdleState extends Scene {
 
   handleButton(data) {
     if (data.down) {
-      console.log("handle buttons ", data)
+      //console.log("handle buttons ", data)
       //console.log('action received', data)
-      if (!this.selectedMaterial[data.action].pressed) {
-        this.selectedMaterial[data.action].pressed = true
-        this.selectedMaterial[data.action].status =
-          (this.selectedMaterial[data.action].status + 1) & 1
+      let material =this.selectedMaterial[data.action]
+      if (!material.pressed) {
+        material.pressed = true
+        material.status =
+          (material.status + 1) & 1
 
         console.log(
           'selected %s material, turn light %s',
           data.label,
-          (this.selectedMaterial[data.action].status > 0) ? 'ON' : 'OFF'
+          (material.status > 0) ? 'ON' : 'OFF'
         )
+        if(material.status>0) {
+          this.io.turnOnLight(material.lightID)
+        }else {
+          this.io.turnOffLight(material.lightID)
+        }
       }
     }
     else {

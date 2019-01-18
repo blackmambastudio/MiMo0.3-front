@@ -46,7 +46,7 @@ class IOManager {
       console.log('Read from GPIO: ' + data);
       console.log(data);
       try{
-        this.Inputs[data.action].pressed = data.status==1
+        this.Inputs[data.action].pressed = data.status
         let event = this.listeners[data.action]
         if(event) event(data)
       }catch(exception){
@@ -97,8 +97,26 @@ class IOManager {
     setLedLight(id, [0,0,0])
   }
 
+  turnOnLight(id){
+    this.socket.emit('btn_led', {
+      'btn_led_id': id,
+      'btn_led_state': 'True'
+    })
+  }
+
+  turnOffLight(id){
+    this.socket.emit('btn_led', {
+      'btn_led_id': id,
+      'btn_led_state': 'False'
+    })
+  }
+
   setButtonBacklight(id, status) {
     //socker.
+  }
+
+  resetButtonStates(){
+    this.socket.emit('btn_reset', {})
   }
 }
 
