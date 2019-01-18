@@ -75,9 +75,9 @@ export default class EditIdleState extends Scene {
   }
 
   handleButton(data) {
-    // console.log('action received', data)
-
     if (data.down) {
+      console.log("handle buttons ", data)
+      //console.log('action received', data)
       if (!this.selectedMaterial[data.action].pressed) {
         this.selectedMaterial[data.action].pressed = true
         this.selectedMaterial[data.action].status =
