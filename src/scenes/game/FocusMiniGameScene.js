@@ -60,6 +60,46 @@ export default class FocusMiniGameScene extends Scene {
 
     // setup data
     this.pieceValue = this.optimizeState.maxScore / this.piecesContainer.length
+
+    //AUDIO
+    this.UI_Turn = this.sound.add('UI_Turn')
+    this.UI_Turn.volume = 0.5
+    
+    this.UI_Pos_01 = this.sound.add('UI_Pos_01')
+    
+    this.UI_Pos_02 = this.sound.add('UI_Pos_02')
+    
+    this.UI_Pos_03 = this.sound.add('UI_Pos_03')
+    
+    this.UI_Pos_04 = this.sound.add('UI_Pos_04')
+    
+    this.UI_Pos_05 = this.sound.add('UI_Pos_05')
+
+    this.UI_Pos = [this.UI_Pos_01, this.UI_Pos_02, this.UI_Pos_03, this.UI_Pos_04, this.UI_Pos_05]
+
+    this.SFX_A = this.sound.add('SFX_A')
+
+    this.SFX_B = this.sound.add('SFX_B')
+    
+    this.SFX_C = this.sound.add('SFX_C')
+
+    this.SFX_D = this.sound.add('SFX_D')
+
+    this.SFX_E = this.sound.add('SFX_E')
+    
+    this.SFXpieces = {
+      pieceA: this.SFX_A,
+      pieceB: this.SFX_B,
+      pieceC: this.SFX_C,
+      pieceD: this.SFX_D,
+      pieceE: this.SFX_E
+    }
+
+    this.BaseLoop = this.sound.add('SFX_BasicLoop')
+
+    this.BaseLoop.play({
+      loop: -1
+    })
   }
 
   update(time, delta) {
@@ -68,7 +108,7 @@ export default class FocusMiniGameScene extends Scene {
     }
 
     this.background.setAlpha(0.4)
-    let piecesInPlace = 0
+    this.piecesInPlace = 0
     this.optimizeState.score = 0
 
     // call the update function that reads inputs from the player
@@ -76,19 +116,19 @@ export default class FocusMiniGameScene extends Scene {
 
     // check if any of the buttons used by the mini-game is pressed
     if (this.optimizeState.inputs.btn0) {
-      this.rotatePiece(this.pieceA, 'optA')
+      this.rotatePiece(this.pieceA, 'pieceA')
     }
     if (this.optimizeState.inputs.btn1) {
-      this.rotatePiece(this.pieceB, 'optB')
+      this.rotatePiece(this.pieceB, 'pieceB')
     }
     if (this.optimizeState.inputs.btn2) {
-      this.rotatePiece(this.pieceC, 'optC')
+      this.rotatePiece(this.pieceC, 'pieceC')
     }
     if (this.optimizeState.inputs.btn3) {
-      this.rotatePiece(this.pieceD, 'optD')
+      this.rotatePiece(this.pieceD, 'pieceD')
     }
     if (this.optimizeState.inputs.btn4) {
-      this.rotatePiece(this.pieceE, 'optE')
+      this.rotatePiece(this.pieceE, 'pieceE')
     }
 
     // check if the player won the mini-game
@@ -99,12 +139,12 @@ export default class FocusMiniGameScene extends Scene {
 
         // TODO: add more feedback animations and sounds here
 
-        piecesInPlace++
-        this.optimizeState.score = piecesInPlace * this.pieceValue
+        this.piecesInPlace++
+        this.optimizeState.score = this.piecesInPlace * this.pieceValue
       }
     })
 
-    if (piecesInPlace === this.piecesContainer.length) {
+    if (this.piecesInPlace === this.piecesContainer.length) {
       this.finished = true
       // TODO: make something happen before the scene is stopped
 
@@ -121,6 +161,8 @@ export default class FocusMiniGameScene extends Scene {
     if (!this.rotating[pieceName]) {
       this.rotating[pieceName] = true
 
+      this.UI_Turn.play()
+
       this.tweens.add({
         targets: [piece],
         // angle destination
@@ -134,7 +176,21 @@ export default class FocusMiniGameScene extends Scene {
         // function to be executed once the tween has been completed
         onComplete: function(tween, targets) {
           this.rotating[pieceName] = false
-          console.log(targets[0].angle)
+          if (targets[0].angle === 0) {
+
+            let sound = this.UI_Pos[this.piecesInPlace]
+            sound.play()
+  
+            this.SFXpieces[pieceName].play({
+              loop: -1
+            })
+  
+            }
+            
+            else 
+            {
+              this.SFXpieces[pieceName].stop()
+            }
         }
       });
     }

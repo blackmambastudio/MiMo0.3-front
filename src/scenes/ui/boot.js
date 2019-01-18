@@ -91,6 +91,57 @@ export default class BootScene extends Scene {
       frameHeight: 331
     })
 
+    // ╔ LOAD AUDIO ═══════════════════════════════════════════════════════════╗
+    // focus game
+    this.load.audio(
+      'SFX_BasicLoop',
+      urlBase + 'assets/audio/SFX/Focus/SFX_BasicLoop.ogg'
+    )
+    this.load.audio(
+      'SFX_A',
+      urlBase + 'assets/audio/SFX/Focus/SFX_A.ogg'
+    )
+    this.load.audio(
+      'SFX_B',
+      urlBase + 'assets/audio/SFX/Focus/SFX_B.ogg'
+    )
+    this.load.audio(
+      'SFX_C',
+      urlBase + 'assets/audio/SFX/Focus/SFX_C.ogg'
+    )
+    this.load.audio(
+      'SFX_D',
+      urlBase + 'assets/audio/SFX/Focus/SFX_D.ogg'
+    )
+    this.load.audio(
+      'SFX_E',
+      urlBase + 'assets/audio/SFX/Focus/SFX_E.ogg'
+    )
+    this.load.audio(
+      'UI_Pos_01',
+      urlBase + 'assets/audio/SFX/Focus/UI_Pos_01.ogg'
+    )
+    this.load.audio(
+      'UI_Pos_02',
+      urlBase + 'assets/audio/SFX/Focus/UI_Pos_02.ogg'
+    )
+    this.load.audio(
+      'UI_Pos_03',
+      urlBase + 'assets/audio/SFX/Focus/UI_Pos_03.ogg'
+    )
+    this.load.audio(
+      'UI_Pos_04',
+      urlBase + 'assets/audio/SFX/Focus/UI_Pos_04.ogg'
+    )
+    this.load.audio(
+      'UI_Pos_05',
+      urlBase + 'assets/audio/SFX/Focus/UI_Pos_05.ogg'
+    )
+    this.load.audio(
+      'UI_Turn',
+      urlBase + 'assets/audio/SFX/Focus/UI_Turn.ogg'
+    )
+
     // -- FONTS ----------------------------------------------------------------
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
