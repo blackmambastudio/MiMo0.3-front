@@ -19,9 +19,14 @@ export default class BootState extends Scene {
     )
     this.logo.setAlpha(0)
 
+    this.SFX_MimoLogo = this.sound.add('SFX_MimoLogo')
+
     // show the logo and after it finishes change to the tutorial scene
     // TODO: play the fancy sound effect of MCorp
+    this.SFX_MimoLogo.play()
     this.tweens.add({
+      
+     
       targets: [this.logo],
       alpha: 1,
       duration: 2000,

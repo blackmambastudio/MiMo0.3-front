@@ -92,6 +92,14 @@ export default class BootScene extends Scene {
     })
 
     // ╔ LOAD AUDIO ═══════════════════════════════════════════════════════════╗
+    
+    // loading scene
+
+    this.load.audio (
+      'SFX_MimoLogo',
+      urlBase + 'assets/audio/SFX/MimoLogo.ogg'
+    )
+
     // focus game
     this.load.audio(
       'SFX_BasicLoop',
