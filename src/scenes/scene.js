@@ -40,9 +40,10 @@ export default class Scene extends Phaser.Scene {
     this.titleText = this.make.text({
       x: this.cameras.main.width / 2,
       y: 30,
-      text: this.scene.key,
+      text: this.scene.key.toUpperCase(),
       style: this.fonts.default
     })
+    this.titleText.setFontFamily('vcrosdmono')
     this.titleText.setOrigin(0.5, 0.5)
     this.titleText.setVisible(this.constants.DISPLAY_SCENE_TITLE)
     // ***
