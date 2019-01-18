@@ -3,12 +3,41 @@ import Scene from '../scene'
 export default class BootState extends Scene {
   constructor () {
     super({key: 'bootState'})
-    // this.nextScene = 'tutorialState' // use this when not developing
-    this.nextScene = 'optimizeState'
+    this.nextScene = 'tutorialState' // use this when not developing
   }
 
   create (params) {
     super.create(params)
+
+    this.titleText.setVisible(false)
+
+    // add to the scene the sprites and other things that will be affected by the player
+    this.logo = this.add.image(
+      this.sys.game.config.width / 2,
+      this.sys.game.config.height / 2,
+      'logo_MCorp'
+    )
+    this.logo.setAlpha(0)
+
+    // show the logo and after it finishes change to the tutorial scene
+    // TODO: play the fancy sound effect of MCorp
+    this.tweens.add({
+      targets: [this.logo],
+      // angle destination
+      alpha: 1,
+      // tween duration
+      duration: 4500,
+      // tween easing
+      ease: "Cubic.easeOut", 
+      // callback scope
+      callbackScope: this,
+      yoyo: true,
+      // function to be executed once the tween has been completed
+      onComplete: function(tween, targets) {
+        this.changeToScene(this.nextScene)
+      }
+    });
+
     /*
     for (var i = 0; i < 6; i++) {
       this.io.clearLCD(22+i)
@@ -83,9 +112,6 @@ export default class BootState extends Scene {
       for (var i = 0; i < 6; i++) {
         this.io.clearLCD(22+i)
       }
-    }, [], this)
-    this.time.delayedCall(4500, () => {
-      this.changeToScene(this.nextScene)
     }, [], this)
   }
 

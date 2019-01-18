@@ -23,7 +23,7 @@ let Inputs = {
 class IOManager {
   constructor() {
     //this.socket = io('http://192.168.0.53:8000',
-    this.socket = io('http://192.168.0.25:8000',
+    this.socket = io('http://192.168.0.25:8008',
       {reconnectionAttempts: 3}
     )
     console.log(this.socket)

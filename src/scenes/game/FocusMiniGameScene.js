@@ -32,20 +32,20 @@ export default class FocusMiniGameScene extends Scene {
     // add to the scene the sprites and other things that will be affected by the player
     this.background = this.add.image(
       this.sys.game.config.width / 2,
-      this.sys.game.config.height / 2 + 32,
+      this.sys.game.config.height / 2,
       this.imageName + '-background'
     )
     this.background.setAlpha(0)
 
     // create the pieces and put them into a Phaser.Container
-    this.piecesContainer = this.add.container(0, 32)
+    this.piecesContainer = this.add.container(0, 0)
 
     // x and y positions took from Illustrator
-    this.pieceA = this.add.image(124, 190, this.imageName + '-pieceA')
-    this.pieceB = this.add.image(320, 190, this.imageName + '-pieceB')
-    this.pieceC = this.add.image(516, 190, this.imageName + '-pieceC')
-    this.pieceD = this.add.image(222, 324, this.imageName + '-pieceD')
-    this.pieceE = this.add.image(418, 324, this.imageName + '-pieceE')
+    this.pieceA = this.add.image(224, 246, this.imageName + '-pieceA')
+    this.pieceB = this.add.image(640, 246, this.imageName + '-pieceB')
+    this.pieceC = this.add.image(1056, 246, this.imageName + '-pieceC')
+    this.pieceD = this.add.image(432, 496, this.imageName + '-pieceD')
+    this.pieceE = this.add.image(848, 496, this.imageName + '-pieceE')
 
     this.piecesContainer.add(this.pieceA)
     this.piecesContainer.add(this.pieceB)

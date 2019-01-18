@@ -148,6 +148,17 @@ export default class BootScene extends Scene {
     this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
     // -- IMAGES ---------------------------------------------------------------
+    // ---- Boot
+    this.load.image('logo_MCorp', urlBase + 'assets/sprites/logo_MCorp.png')
+
+    // ---- Tutorial
+    this.load.image('mimo_blueprint', urlBase + 'assets/sprites/mimo_blueprint.png')
+    this.load.image('material_ico', urlBase + 'assets/sprites/material_ico.png')
+    this.load.image('optimization_ico', urlBase + 'assets/sprites/optimization_ico.png')
+    this.load.image('printer-01', urlBase + 'assets/sprites/printer-01.png')
+    this.load.image('printer-02', urlBase + 'assets/sprites/printer-02.png')
+    this.load.image('printer-03', urlBase + 'assets/sprites/printer-03.png')
+
     // ---- Focus mini-game: TV control room
     this.load.image(
       'tv_control_room-background',

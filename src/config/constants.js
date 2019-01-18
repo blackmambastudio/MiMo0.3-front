@@ -8,7 +8,7 @@
 */
 
 const SCALE = 1
-const BACKGROUND_COLOR = 0x000
+const BACKGROUND_COLOR = 0x1B0C43
 
 // time in milliseconds to keep visible the "splash" scene
 const TIME_SPLASH = 200
@@ -34,8 +34,8 @@ const DAT_GUI_ENABLE = false
 const AFTER_BOOT_SCENE = 'bootState'
 
 export default {
-  WIDTH: 640,
-  HEIGHT: 480,
+  WIDTH: 1280,
+  HEIGHT: 720,
   SCALE,
   BACKGROUND_COLOR,
   FAKE_LOADER_ACTIVE,
