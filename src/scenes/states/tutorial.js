@@ -156,12 +156,18 @@ export default class TutorialState extends Scene {
 
         this.SFX_Tut_Print.play()
 
+        this.io.printerMessage('SYSTEM CHECK', 'M.I.M.O.', 'VERIFYING PRINTER')
+
         this.printerAnimation = this.time.addEvent({
           delay: 500,
-          loop: true,
+          repeat: 7,
+          loop: false,
           callback: () => {
             this.printersContainer.getAt(currentPrinter++).setAlpha(0)
-            if (currentPrinter > 2) currentPrinter = 0
+            if (currentPrinter > 2){
+              currentPrinter = 0
+              this.io.printerMessage('NEWS PROVIDER', 'OK', '...')
+            } 
             this.printersContainer.getAt(currentPrinter).setAlpha(1)
           },
           callbackScope: this
@@ -189,19 +195,48 @@ export default class TutorialState extends Scene {
     this.subtitleText.setText('PRESS EACH BUTTON TO SELECT THE MATERIAL\nYOU WANT TO USE TO EVOKE AN EMOTION IN THE CURRENT NEWS')
 
     this.SFX_Tut_Mat.play()
-
+    let spacingTime = 100
+    let delay = 200
+    this.playLightSequenceComplex([15,29,31,13,35,33], delay, spacingTime)
+    this.playLightSequenceComplex([15,29,31,13,35,33], 1400, spacingTime)
+    this.playLightSequenceComplex([15,29,31,13,35,33], 2800, spacingTime)
+    this.playLightSequenceComplex([15,29,31,13,35,33], 4200, spacingTime)
+    this.playLightSequenceComplex([15,29,31,13,35,33], 5400, spacingTime/2)
+    this.playLightSequenceComplex([15,29,31,13,35,33], 6000, spacingTime/2)
     
 
     this.materialIconsContainer.iterate(icon => {
       this.useAlphaTween({
         target: icon,
         alpha: 1,
-        duration: 500 + (1000 * icon.index),
-        callback: _ => {
-          this.time.delayedCall(6000, this.highlightOptimization, null, this)
-        }
+        duration: 500 + (1000 * icon.index)
       })
     })
+    this.time.delayedCall(6500, this.highlightOptimization, null, this)
+  }
+
+  blink(id, start, delay){
+    this.time.delayedCall(start, () => {
+      this.io.turnOnLight(id)
+    }, [], this)
+    this.time.delayedCall(start+delay, () => {
+      this.io.turnOffLight(id)
+    }, [], this)    
+  }
+
+  playLightSequence(sequence){
+    //console.log(sequence)
+    for (var i = 0; i < sequence.length; i++) {
+      let light = sequence[i]
+      this.blink(light[0], light[1], light[2])
+    }
+  }
+
+  playLightSequenceComplex(sequence, delay, spacingTime){
+    for (var i = 0; i < sequence.length; i++) {
+      sequence[i] = [sequence[i], delay+spacingTime*0, spacingTime*4]  
+    }
+    this.playLightSequence(sequence)
   }
 
   highlightOptimization() {
@@ -222,12 +257,10 @@ export default class TutorialState extends Scene {
       this.useAlphaTween({
         target: icon,
         alpha: 1,
-        duration: 500 + (1000 * icon.index),
-        callback: _ => {
-          this.time.delayedCall(5000, this.showWelcome, null, this)
-        }
+        duration: 500 + (1000 * icon.index)
       })
     })
+    this.time.delayedCall(6000, this.showWelcome, null, this)
   }
 
   showWelcome() {
@@ -257,13 +290,17 @@ export default class TutorialState extends Scene {
       duration: 2000,
       callback: _ => {
         this.time.delayedCall(
-          4500,
+          1500,
           _ => this.changeToScene(this.nextScene),
           null,
           this
         )
       }
     })
+
+    let spacingTime = 250
+    let delay = 200
+    this.playLightSequenceComplex([15,29,31,13,35,33], delay, spacingTime)
 
   }
 }

@@ -26,20 +26,20 @@ class IOManager {
     this.socket = io('http://192.168.0.25:8000',
       {reconnectionAttempts: 3}
     )
-    console.log(this.socket)
+    //console.log(this.socket)
     this.socket.on("connect", _ => {
-      console.log("connected")
+      //console.log("connected")
       this.socket.emit('connect2pi', {
         data: 'Table UI connected.'
       });
     });
 
     this.socket.on('connect2pi', msg => {
-      console.log('c2p connected!!!!!!!', msg);
+      //console.log('c2p connected!!!!!!!', msg);
     });
 
     this.socket.on('hello', msg => {
-      console.log('serial connected!!!!!!!', msg);
+      //console.log('serial connected!!!!!!!', msg);
     });
 
     this.socket.on('gpio', data => {
@@ -122,13 +122,14 @@ class IOManager {
     })
   }
 
-  printerMessage(){
-    return true
-    this.socket.emit('printer', {
-      'user': 'MiMo Console',
-      'date': 'Oct 30  1982',
-      'text': ">> INCOMING EVENT <<\n\nTHE PRESIDENTIAL CANDIDATE FULANO SAYS HE WILL ALWAYS SUPPORT TELMAR AS LONG AS THAT DOESN'T JEOPARDIZE OUR RELATIONSHIP WITH HUNAGARA'S GOVERMENT."
-    })
+  printerMessage(user, date, text){
+    let data = {
+      'user': user,
+      'date': date,
+      'text': text
+    }
+    //console.log(data)
+    this.socket.emit('printer', data)
   }
 
   setButtonBacklight(id, status) {

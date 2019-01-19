@@ -26,7 +26,7 @@ const DISPLAY_SCENE_TITLE = true
 const FAKE_LOADER_ACTIVE = false
 
 // display stats
-const RUNNING_STATS = true
+const RUNNING_STATS = false
 
 // display dat.gui plugin
 const DAT_GUI_ENABLE = false

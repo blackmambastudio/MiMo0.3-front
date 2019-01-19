@@ -89,7 +89,7 @@ export default class BootState extends Scene {
       }
     }, [], this)
     this.time.delayedCall(4400, () => {
-      console.log('loading end')
+      //console.log('loading end')
       this.changeToScene(this.nextScene)
     }, [], this)
   }
@@ -104,7 +104,6 @@ export default class BootState extends Scene {
   }
 
   playLightSequence(sequence){
-    console.log(sequence)
     for (var i = 0; i < sequence.length; i++) {
       let light = sequence[i]
       this.blink(light[0], light[1], light[2])

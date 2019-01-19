@@ -1,7 +1,7 @@
 import Scene from '../scene'
 
-//const env = 'PRODUCTION'
-const env = 'DEV'
+const env = 'PRODUCTION'
+//const env = 'DEV'
 
 export default class BootScene extends Scene {
   constructor() {
@@ -190,14 +190,14 @@ export default class BootScene extends Scene {
 
     // ---- Tutorial
     this.load.image('mimo_blueprint', urlBase + 'assets/sprites/mimo_blueprint.png')
-    this.load.image('mtlL1', 'assets/sprites/mtlL1.png')
-    this.load.image('mtlL2', 'assets/sprites/mtlL2.png')
-    this.load.image('mtlL3', 'assets/sprites/mtlL3.png')
-    this.load.image('mtlR1', 'assets/sprites/mtlR1.png')
-    this.load.image('mtlR2', 'assets/sprites/mtlR2.png')
-    this.load.image('mtlR3', 'assets/sprites/mtlR3.png')
-    this.load.image('opt_knobs', 'assets/sprites/opt_knobs.png')
-    this.load.image('opt_buttons', 'assets/sprites/opt_buttons.png')
+    this.load.image('mtlL1',  urlBase +'assets/sprites/mtlL1.png')
+    this.load.image('mtlL2',  urlBase +'assets/sprites/mtlL2.png')
+    this.load.image('mtlL3',  urlBase +'assets/sprites/mtlL3.png')
+    this.load.image('mtlR1',  urlBase +'assets/sprites/mtlR1.png')
+    this.load.image('mtlR2',  urlBase +'assets/sprites/mtlR2.png')
+    this.load.image('mtlR3',  urlBase +'assets/sprites/mtlR3.png')
+    this.load.image('opt_knobs', urlBase + 'assets/sprites/opt_knobs.png')
+    this.load.image('opt_buttons', urlBase + 'assets/sprites/opt_buttons.png')
     this.load.image('printer-01', urlBase + 'assets/sprites/printer-01.png')
     this.load.image('printer-02', urlBase + 'assets/sprites/printer-02.png')
     this.load.image('printer-03', urlBase + 'assets/sprites/printer-03.png')

@@ -79,9 +79,9 @@ export default class EditIdleState extends Scene {
       }
     }
     // add to the scene buttons and other things that will allow player interaction
+    this.io.printerMessage('M.i.M.o. System v 0.5.2', 'Jan 19 1993', '>> INCOMING EVENT <<\n\n>> '+this.newsDescription.toUpperCase())
     this.createUI()
     
-    this.io.printerMessage()
 
     // add listeners for material selection
     /*
@@ -181,12 +181,12 @@ export default class EditIdleState extends Scene {
   }
 
   buttonF(data) {
-    console.log('on F pressed!!', data)
+    //console.log('on F pressed!!', data)
   }
 
   update(time, delta) {
     if(this.io.Inputs['BTN-0'].pressed){
-      console.log('woooo')
+      //console.log('woooo')
     }
 
     // check material selection buttons that have been pressed
