@@ -24,7 +24,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 22,
         message: 'Oppressor......... country..........',
         messageSelected: '->.Oppressor......... ...country..........',
-        image: this.add.image(0, 0, 'mp_countryOppressive')
+        image: this.add.image(0, 0, 'mp_countryOppressive'),
+        sound: this.sound.add('mp_countryOppressive_SFX')
       },
       mtlL2: {
         pressed: false,
@@ -33,7 +34,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 23,
         message: 'People.......... working.........',
         messageSelected: '->.People....... ...working......',
-        image: this.add.image(0, 0, 'mp_womenWorking')
+        image: this.add.image(0, 0, 'mp_womenWorking'),
+        sound: this.sound.add('mp_womenWorking_SFX')
       },
       mtlL3: {
         pressed: false,
@@ -42,7 +44,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 24,
         message: 'Periphery..........',
         messageSelected: '->.Periphery..........',
-        image: this.add.image(0, 0, 'mp_womenWorking')
+        image: this.add.image(0, 0, 'mp_womenWorking'),
+        sound: this.sound.add('mp_womenWorking_SFX')
       },
       mtlR1: {
         pressed: false,
@@ -51,7 +54,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 25,
         message: '...........Happy ..........family',
         messageSelected: '........Happy.<- .......family...',
-        image: this.add.image(0, 0, 'mp_familyHappy')
+        image: this.add.image(0, 0, 'mp_familyHappy'),
+        sound: this.sound.add('mp_familyHappy_SFX')
       },
       mtlR2: {
         pressed: false,
@@ -60,7 +64,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 26,
         message: '...........Women .........working',
         messageSelected: '........Women.<- ......working...',
-        image: this.add.image(0, 0, 'mp_womenWorking')
+        image: this.add.image(0, 0, 'mp_womenWorking'),
+        sound: this.sound.add('mp_womenWorking_SFX')
       },
       mtlR3: {
         pressed: false,
@@ -69,7 +74,8 @@ export default class EditIdleState extends Scene {
         LCD_ID: 27,
         message: '.......Abandoned .........factory',
         messageSelected: '....Abandoned.<- ......factory...',
-        image: this.add.image(0, 0, 'mp_factoryAbandoned')
+        image: this.add.image(0, 0, 'mp_factoryAbandoned'),
+        sound: this.sound.add('mp_factoryAbandoned_SFX')
       }
     }
     // add to the scene buttons and other things that will allow player interaction
@@ -158,6 +164,7 @@ export default class EditIdleState extends Scene {
         duration: 500,
         ease: "Cubic.easeOut" 
     })
+    material.sound.play()
 
     this.children.bringToTop(material)
     this.nextId++;

@@ -177,6 +177,8 @@ export default class BootScene extends Scene {
       urlBase + 'assets/audio/SFX/Focus/UI_Turn.ogg'
     )
 
+    // load materials
+
     // -- FONTS ----------------------------------------------------------------
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')
     this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
@@ -238,6 +240,10 @@ export default class BootScene extends Scene {
       this.load.image(
         material,
         urlBase +'assets/material/'+material+'.png'
+      )
+      this.load.audio(
+        material+'_SFX',
+        urlBase + 'assets/audio/SFX/Material/'+material+'_SFX.ogg'
       )
     }
 
