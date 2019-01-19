@@ -1,7 +1,7 @@
 import Scene from '../scene'
 
-const env = 'PRODUCTION'
-//const env = 'DEV'
+//const env = 'PRODUCTION'
+const env = 'DEV'
 
 export default class BootScene extends Scene {
   constructor() {
