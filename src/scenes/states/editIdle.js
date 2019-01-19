@@ -101,8 +101,9 @@ export default class EditIdleState extends Scene {
       let materialHW = this.selectedMaterial[key]
       this.io.displayOnLCD(materialHW.LCD_ID, materialHW.message, 1)
       materialHW.image.visible = false
-      materialHW.image.setOrigin(0, 0)
-      materialHW.image.setScale(0.5, 0.5)
+      materialHW.image.setOrigin(0, 0.5)
+      materialHW.image.y = 360
+      materialHW.image.setScale(0.35, 0.35)
     })
   }
 
@@ -149,8 +150,15 @@ export default class EditIdleState extends Scene {
     this.io.displayOnLCD(material.LCD_ID, material.messageSelected, 1)
 
     material.image.visible = true
-    material.image.x = this.nextId*50
-    material.image.y = this.nextId*40
+    material.image.x = this.nextId*320+640
+
+    this.tweens.add({
+      targets: [material.image],
+        x: this.nextId*320+10,
+        duration: 500,
+        ease: "Cubic.easeOut" 
+    })
+
     this.children.bringToTop(material)
     this.nextId++;
   }
