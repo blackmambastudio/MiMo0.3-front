@@ -54,6 +54,18 @@ export default class TutorialState extends Scene {
     this.mimo_blueprint = this.add.image(640, 265, 'mimo_blueprint')
     this.mimo_blueprint.setAlpha(0)
     
+    // AUDIO
+
+    this.SFX_Tut_Print = this.sound.add('SFX_Tut_Print')
+
+    this.SFX_Tut_Mat = this.sound.add('SFX_Tut_Mat')
+    
+    this.SFX_Tut_Opt = this.sound.add('SFX_Tut_Opt')
+
+    this.SFX_Tut_St = this.sound.add('SFX_Tut_St')
+
+    this.SFX_Tut_End = this.sound.add('SFX_Tut_End')
+
     // material icons
     this.materialIconsContainer = this.add.container(0, 0)
     for (let index = 0; index < 6; index++) {
@@ -116,6 +128,7 @@ export default class TutorialState extends Scene {
       duration: 2000,
       alpha: 1,
       callback: _ => {
+        this.SFX_Tut_St.play()
         this.titleText.setText('-- M.I.M.O. VERIFICATION PROCESS --')
         this.time.delayedCall(2000, this.highlightPrinter, null, this)
       }
@@ -130,13 +143,17 @@ export default class TutorialState extends Scene {
     })
 
     let currentPrinter = 0
+    
     this.useAlphaTween({
+      
       target: this.printer01,
       alpha: 1,
       duration: 1000,
       callback: _ => {
         this.titleText.setText('VERIFYING PRINTER')
         this.subtitleText.setText('Read each incoming event and use the material\nattached to it to transform it into the news')
+
+        this.SFX_Tut_Print.play()
 
         this.printerAnimation = this.time.addEvent({
           delay: 500,
@@ -165,8 +182,14 @@ export default class TutorialState extends Scene {
 
     this.printerAnimation.remove()
 
+    
+
     this.titleText.setText('VERIFYING MATERIAL PANEL')
     this.subtitleText.setText('Press each button to select the material\nyou want to use to evoke an emotion in the current news')
+
+    this.SFX_Tut_Mat.play()
+
+    
 
     this.materialIconsContainer.iterate(icon => {
       this.useAlphaTween({
@@ -192,6 +215,8 @@ export default class TutorialState extends Scene {
     this.titleText.setText('VERIFYING OPTIMIZATION PANEL')
     this.subtitleText.setText('Use the knobs and buttons to improve the impact\nof the evoked emotion')
 
+    this.SFX_Tut_Opt.play()
+
     this.optimizationIconsContainer.iterate(icon => {
       this.useAlphaTween({
         target: icon,
@@ -206,6 +231,8 @@ export default class TutorialState extends Scene {
 
   showWelcome() {
     this.titleText.setText('-- M.I.M.O. VERIFICATION COMPLETED --')
+    this.SFX_Tut_End.play()
+
       this.subtitleText.setText('All works fine.\nWelcome! you can start manufacturing the news.')
     
     this.printersContainer.iterate(icon => {

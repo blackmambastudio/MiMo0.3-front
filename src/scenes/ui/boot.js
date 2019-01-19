@@ -100,6 +100,33 @@ export default class BootScene extends Scene {
       urlBase + 'assets/audio/SFX/MimoLogo.ogg'
     )
 
+    // tutorial scene
+
+    this.load.audio (
+      'SFX_Tut_Print',
+      urlBase + 'assets/audio/SFX/SFX_Tut_Print.ogg'
+    )
+
+    this.load.audio (
+      'SFX_Tut_Mat',
+      urlBase + 'assets/audio/SFX/SFX_Tut_Mat.ogg'
+    )
+
+    this.load.audio (
+      'SFX_Tut_Opt',
+      urlBase + 'assets/audio/SFX/SFX_Tut_Opt.ogg'
+    )
+
+    this.load.audio (
+      'SFX_Tut_St',
+      urlBase + 'assets/audio/SFX/SFX_Tut_St.ogg'
+    )
+
+    this.load.audio (
+      'SFX_Tut_End',
+      urlBase + 'assets/audio/SFX/SFX_Tut_End.ogg'
+    )
+
     // focus game
     this.load.audio(
       'SFX_BasicLoop',
